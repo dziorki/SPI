@@ -126,31 +126,37 @@
                 <div id="LGDlg" style="display: none;"></div>
                 <div id="box_login">
                     <div id="header">
+                        {% block content_login %}
                         <h4 class="box_header">
                             <span>Logowanie</span>
                         </h4>
                         <div class="box">
+                            {% if error %}
+                                <div>{{ error.message }}</div><br/>
+                            {% endif %}
+                            <form action="{{ path('login_check') }}" method="post">
                             <table cellspacing="0" cellpadding="0" border="0" id="login_table">
                                 <tr>
                                     <td>
-                                        <label id="username_label">Użytkownik:</label>
-                                        <input class="text-input" type="text" id="username">
+                                        <label for="username" id="username_label">Użytkownik:</label>
+                                        <input class="text-input" type="text" id="username" name="_username" value="{{ last_username }}" />
                                     </td>
                                     <td>
                                         &nbsp;
                                     </td>
                                     <td>
                                         <label id="password_label">Hasło:</label>
-                                        <input class="text-input" type="password" id="password">
+                                        <input class="text-input" type="password" id="password" name="_password" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <br>
-                                        <input type="button" class="button" name="Zaloguj" id="" value="Zaloguj" onclick="$('#box_login').fadeOut(1000); return getAsyncContent('index/login?username='+escape($('#username').val())+'&password='+escape($('#password').val()),'none',null,runAfterLogin);">
+                                        <input class="button" value="Zaloguj" type="submit" name="login" />
                                     </td>    
                                 </tr>
                             </table>
+                            </form>
                             <div class="mbn">
                                 <input id="" type="checkbox" name=""><a href="javascript:imgClick()" class="RememberMeLabel">Zapamiętaj</a>
                                 | 
@@ -161,6 +167,7 @@
                                 <a id="" href="profil/odzyskaj-haslo.aspx">Odzyskaj hasło</a>
                             </div>
                         </div>
+                        {% endblock %}
                     </div>
 
                 </div>

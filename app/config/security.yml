@@ -1,4 +1,6 @@
 security:
+    acl:
+        connection: default
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
@@ -22,13 +24,14 @@ security:
             security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/
+            anonymous: ~
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
+                login_path: /login
+                check_path: /login_check
             logout:
-                path:   /demo/secured/logout
-                target: /demo/
+                path:   /logout
+                target: /
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
