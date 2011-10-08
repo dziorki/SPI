@@ -1,0 +1,3 @@
+PortfelSecurityBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: PortfelSecurityBundle:Default:index }

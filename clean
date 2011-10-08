@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo rm -fR app/cache/*
+sudo ./app/console cache:clear
+sudo chmod 777 -R app/cache/

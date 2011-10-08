@@ -1,0 +1,151 @@
+{% extends "::base.html.twig" %} 
+
+{% block content %}
+            <div id="left">
+                <div id="bottom"></div>
+                <div id="chartsview" class="bigchartsresize">
+                    <div class="content" >
+                        <ul id="chartslist" class="chartslist">
+                            <li id="chartslist_1">
+                                <a class="closebtn" title="Usuń"></a>
+                                <a class="movebtn" title="Przesuń"></a>
+                                <div class="header">
+                                    <a class="hname" href="/notowania/KGH">KGH</a>
+                                    <span class="htime">29 lip 17:33</span>
+                                    <span class="hvalue">1.000</span>
+                                    <span class="hchange"><span class="cminus">(-23.00%)</span></span>
+                                </div>
+                                <div id="chartph-1" class="chartph" style="position: relative; height: 120px; width: 286px; "></div>
+                            </li>
+                            <li id="chartslist_2">
+                                <a class="closebtn" title="Usuń"></a>
+                                <a class="movebtn" title="Przesuń"></a>
+                                <div class="header">
+                                    <a class="hname" href="/notowania/KGH">KGH</a>
+                                    <span class="htime">29 lip 17:33</span>
+                                    <span class="hvalue">2.000</span>
+                                    <span class="hchange"><span class="cminus">(-23.00%)</span></span>
+                                </div>
+                                <div id="chartph-2" class="chartph" style="position: relative; height: 120px; width: 286px; "></div>
+                            </li>
+                            <li id="chartslist_3">
+                                <a class="closebtn" title="Usuń"></a>
+                                <a class="movebtn" title="Przesuń"></a>
+                                <div class="header">
+                                    <a class="hname" href="/notowania/KGH">KGH</a>
+                                    <span class="htime">29 lip 17:33</span>
+                                    <span class="hvalue">3.000</span>
+                                    <span class="hchange"><span class="cminus">(-23.00%)</span></span>
+                                </div>
+                                <div id="chartph-3" class="chartph" style="position: relative; height: 120px; width: 286px; "></div>
+                            </li>
+                            <li id="chartslist_4">
+                                <a class="closebtn" title="Usuń"></a>
+                                <a class="movebtn" title="Przesuń"></a>
+                                <div class="header">
+                                    <a class="hname" href="/notowania/KGH">KGH</a>
+                                    <span class="htime">29 lip 17:33</span>
+                                    <span class="hvalue">4.000</span>
+                                    <span class="hchange"><span class="cminus">(-23.00%)</span></span>
+                                </div>
+                                <div id="chartph-4" class="chartph" style="position: relative; height: 120px; width: 286px; "></div>
+                            </li>
+                            <li id="chartslist_5">
+                                <a class="closebtn" title="Usuń"></a>
+                                <a class="movebtn" title="Przesuń"></a>
+                                <div class="header">
+                                    <a class="hname" href="/notowania/KGH">KGH</a>
+                                    <span class="htime">29 lip 17:33</span>
+                                    <span class="hvalue">5.000</span>
+                                    <span class="hchange"><span class="cminus">(-23.00%)</span></span>
+                                </div>
+                                <div id="chartph-5" class="chartph" style="position: relative; height: 120px; width: 286px; "></div>
+                            </li>
+                        </ul>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+                <div class="clr"></div>
+
+                <div class="content">
+                    
+                </div>
+            </div>
+            <div id="right">
+                <div id="LGDlg" style="display: none;"></div>
+                <div id="box_login">
+                    <div id="header">
+                        <h4 class="box_header">
+                            <span>Logowanie</span>
+                        </h4>
+                        <div class="box">
+                            {% if app.user %}                      
+                            Jesteś zalogowany jako <strong>{{ app.user.username }}</strong>  <a href="{{ url('logout') }}">Wyloguj</a><br/><br/>
+                            {% else %}
+                            {% if error %}
+                                <div>{{  error.message | trans }}</div><br/>
+                            {% endif %}
+                            <form action="{{ path('login_check') }}" method="post">
+                            <table cellspacing="0" cellpadding="0" border="0" id="login_table">
+                                <tr>
+                                    <td>
+                                        <label for="username" id="username_label">Użytkownik:</label>
+                                        <input class="text-input" type="text" id="username" name="_username" />
+                                    </td>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <label id="password_label">Hasło:</label>
+                                        <input class="text-input" type="password" id="password" name="_password" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br>
+                                        <input class="button" value="Zaloguj" type="submit" name="login" />
+                                    </td>    
+                                </tr>
+                            </table>
+                            </form>
+                            <div class="mbn">
+                                <input id="" type="checkbox" name=""><a href="javascript:imgClick()" class="RememberMeLabel">Zapamiętaj</a>
+                                | 
+                                <a id="" href="profil/rejestracja.aspx">Rejestruj</a>
+                                |
+                                <a id="" href="regeneruj-link.aspx">Aktywuj</a>
+                                |
+                                <a id="" href="profil/odzyskaj-haslo.aspx">Odzyskaj hasło</a>
+                            </div>
+                        {% endif %}
+                        </div>
+
+                    </div>
+
+                </div>
+                <br/>
+                <div id="box-oragne">
+                    <div id="header">
+                        <h4 class="box_header">
+                            <span>Twoje spółki</span>
+                        </h4>
+                        <div class="box-orange">
+                            <div>
+                                <ul>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                                </ul>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

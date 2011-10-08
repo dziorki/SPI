@@ -1,0 +1,13 @@
+{% extends 'PortfelIndexBundle:Index:index.html.twig' %}
+
+
+{% block content_login %}
+<div class="box">
+    Jesteś zalogowany jako <strong>{{ app.user ? app.user.username : null }}</strong>  <a href="{{ url('logout') }}">Wyloguj</a>
+<br/><br/>
+</div>
+{% endblock %}
+
+
+
+{% set code = code(_self) %}

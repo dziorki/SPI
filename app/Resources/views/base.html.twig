@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" type="text/css" media="all" />
+<title>{% block title "Portfel inwestycyjny" %}</title>
+<link rel="stylesheet" href="{{ asset('bundles/portfel/css/print.css') }}" type="text/css" media="print" />
+<link rel="stylesheet" href="{{ asset('bundles/portfel/css/reset.css') }}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ asset('bundles/portfel/css/style.css') }}" type="text/css" media="screen" />
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+
+
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/jquery.cookie.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/engine.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/jquery.jqplot.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/jqplot.dateAxisRenderer.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/portfel/js/getAsyncContent.js') }}"></script>
+
+</head>
+<body>
+    <!-- wrapper -->
+    <div id="wrapper">
+        <div id="top">
+            <a href="{{ path('_welcome') }}">
+                <img src="{{ asset('bundles/portfel/images/logo.png') }}" alt="Symfony">
+            </a>
+        </div>
+        <div id="middle">
+        {% block content%}
+        {% endblock  %}
+        </div>
+        <div style="float:left;margin-top: 300px;"></div>
+    </div><!-- wrapper -->
+    
+    <div id="footer">
+        {% include 'PortfelIndexBundle:Index:footer.html.twig' %}
+    </div>
+</body>
 </html>

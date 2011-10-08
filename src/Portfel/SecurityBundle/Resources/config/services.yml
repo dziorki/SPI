@@ -1,0 +1,7 @@
+parameters:
+#    portfel_security.example.class: Portfel\SecurityBundle\Example
+
+services:
+#    portfel_security.example:
+#        class: %portfel_security.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
