@@ -281,7 +281,7 @@ p small {
     color: #777;
 }
 
-input.text-input,
+input, input.text-input,
 select,
 textarea,
 .wysiwyg {
@@ -325,7 +325,7 @@ input[type="radio"] {
     border: 0;
 }
 
-input.text-input,
+input, input.text-input,
 textarea,
 .wysiwyg,
 form select,
@@ -365,7 +365,7 @@ a.remove-link:hover {
  * Footer
 */
 #footer{
-    background:url('../images/bg-pattern.gif') no-repeat center top #0B0D12;
+    background: #0B0D12;
     clear:both;
 }
 
@@ -454,4 +454,25 @@ a.remove-link:hover {
 #footer .block table td{
     padding:7px 0;
     padding-left:8px;
+}
+
+td.register_left {
+    background: url(../images/larr.gif) right center; 
+    color: #005a8c; 
+    padding-left: 10px;
+    width: 40%; height: 30px;
+    vertical-align: middle;
+}
+td label{
+    margin-top:8px;
+}
+
+td.register_center {
+    padding-left: 10px;
+    width: 20%; height: 30px;
+}
+
+td.register_right {
+    padding-left: 10px;
+    width: 40%; height: 30px;
 }

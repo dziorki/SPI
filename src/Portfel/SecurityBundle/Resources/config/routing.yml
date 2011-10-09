@@ -1,3 +1,3 @@
-PortfelSecurityBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PortfelSecurityBundle:Default:index }
+register:
+    pattern:  /register
+    defaults: { _controller: PortfelSecurityBundle:Register:add }

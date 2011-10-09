@@ -1,3 +1,14 @@
+$(document).ready(function(){
+    $("#remember_click").click(function(){
+        if($("#remember_me").is(':checked')){
+            $("#remember_me").attr('checked',false);
+        } else {
+            $("#remember_me").attr('checked',true);
+        }
+    });
+});
+
+
 $(document).ready(function(){ 
 
     $(function() {
@@ -32,74 +43,74 @@ $(document).ready(function(){
 
 
 
-var Opt = {
-    title: null,
-    axes: {
-        xaxis:{
-            renderer: $.jqplot.DateAxisRenderer,
-            tickOptions:{
-                formatString: "%H:%M"
+    var Opt = {
+        title: null,
+        axes: {
+            xaxis:{
+                renderer: $.jqplot.DateAxisRenderer,
+                tickOptions:{
+                    formatString: "%H:%M"
+                },
+                numberTicks: 2
             },
-            numberTicks: 2
-        },
-        y2axis:{
-            numberTicks: 5,
-            tickOptions:{
-                formatString:'%.2f'
+            y2axis:{
+                numberTicks: 5,
+                tickOptions:{
+                    formatString:'%.2f'
 
+                }
+            },
+            yaxis:{
+                rendererOptions: {
+                    barWidth: 1, 
+                    shadowOffset: 0, 
+                    shadowDepth: 0
+                }
             }
         },
-        yaxis:{
-            rendererOptions: {
-                barWidth: 1, 
-                shadowOffset: 0, 
-                shadowDepth: 0
-            }
+        series:[{
+            yaxis: 'y2axis',
+            color: '#3B5998',
+            shadow: false,
+            showMarker: false,
+            lineWidth:1   
+        }],
+        grid: {
+            gridLineColor: '#e7e7e7',
+            gridLineWidth: 1,
+            borderColor:'#e7e7e7',
+            borderWidth: 0,
+            background: '#ffffff',
+            shadow: false
         }
-    },
-    series:[{
-        yaxis: 'y2axis',
-        color: '#3B5998',
-        shadow: false,
-        showMarker: false,
-        lineWidth:1   
-    }],
-    grid: {
-        gridLineColor: '#e7e7e7',
-        gridLineWidth: 1,
-        borderColor:'#e7e7e7',
-        borderWidth: 0,
-        background: '#ffffff',
-        shadow: false
-    }
-};
+    };
 
-Model = {
+    Model = {
     
     
     
     
-    addchart: function(id){
-        if(!$("#chartslist_"+id).length){
+        addchart: function(id){
+            if(!$("#chartslist_"+id).length){
         
-            $.post("chart",{
-                id: id
-            }, function(data) {
-                $(".chartslist").append('<li id="chartslist_'+id+'"><a class="closebtn" title="Usuń"></a><a class="movebtn" title="Przesuń"></a><div class="header"><a class="hname" href="/notowania/KGH">'+data.data.name+'</a><span class="htime">29 lip 17:33</span><span class="hvalue">'+data.data.value+'</span><span class="hchange"><span class="cminus">(-23.00%)</span></span></div><div id="chartph-'+id+'" class="chartph" style="position: relative; height: 120px; width: 286px; "></div></li>');
-                var order = $(".chartslist").sortable('serialize',{
-                    key: 'order'
-                }) ;
+                $.post("chart",{
+                    id: id
+                }, function(data) {
+                    $(".chartslist").append('<li id="chartslist_'+id+'"><a class="closebtn" title="Usuń"></a><a class="movebtn" title="Przesuń"></a><div class="header"><a class="hname" href="/notowania/KGH">'+data.data.name+'</a><span class="htime">29 lip 17:33</span><span class="hvalue">'+data.data.value+'</span><span class="hchange"><span class="cminus">(-23.00%)</span></span></div><div id="chartph-'+id+'" class="chartph" style="position: relative; height: 120px; width: 286px; "></div></li>');
+                    var order = $(".chartslist").sortable('serialize',{
+                        key: 'order'
+                    }) ;
 
-                $.jqplot('chartph-'+id,[data.data.quotes],Opt);
+                    $.jqplot('chartph-'+id,[data.data.quotes],Opt);
                 
-                $.cookie('recordListing', order);
-            },'json');        
+                    $.cookie('recordListing', order);
+                },'json');        
         
 
-        }
+            }
 
+        }
     }
-}
 
 
 

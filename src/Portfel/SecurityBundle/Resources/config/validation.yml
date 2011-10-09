@@ -1,0 +1,7 @@
+Portfel\SecurityBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: ~
+            - MinLength: 3
+        password:
+            - MinLength: { limit: 7 }

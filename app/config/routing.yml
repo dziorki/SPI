@@ -1,11 +1,11 @@
-AdministratorAdminBundle:
-    resource: "@AdministratorAdminBundle/Resources/config/routing.yml"
-    prefix:   /
-
-#PortfelSecurityBundle:
-#    resource: "@PortfelSecurityBundle/Resources/config/routing.yml"
+#AdministratorAdminBundle:
+#    resource: "@AdministratorAdminBundle/Resources/config/routing.yml"
 #    prefix:   /
-#    
+
+PortfelSecurityBundle:
+    resource: "@PortfelSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+    
 #    
 #PortfelIndexBundle:
 #    resource: "@PortfelIndexBundle/Resources/config/routing.yml"
@@ -29,8 +29,4 @@ logout:
 admin:
     pattern:  /admin
     defaults: { _controller: AdministratorAdminBundle:Admin:index }
-    
-# Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
+   

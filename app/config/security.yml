@@ -2,24 +2,28 @@ security:
     acl:
         connection: default
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Portfel\SecurityBundle\Entity\User:
+            algorithm: sha512
+            iterations: 1
+            encode_as_base64: true
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+#        in_memory:
+#            users:
+#                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                admin: { password: tomasz21, roles: [ 'ROLE_ADMIN' ] }
+        main:
+            entity: { class: Portfel\SecurityBundle\Entity\User, property: username }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        secured_area:
+        main:
             pattern:    ^/
             anonymous: ~
             form_login:
@@ -28,11 +32,20 @@ security:
                 post_only: true
                 use_referer: false
                 always_use_default_target_path: true
+                remember_me: true
+                
             logout:
                 path:   /user/logout
                 target: /
+                invalidate_session: true
+                
             http_basic:
                 realm: "Secured Area"
                 
+            remember_me:
+                key:      "a09aec011a0668194f6ce3a992d8c4b3fa821c32"
+                lifetime: 1
+                path:     /
+                domain:   ~ 
     access_control:
             - { path: ^/admin, roles: ROLE_ADMIN }

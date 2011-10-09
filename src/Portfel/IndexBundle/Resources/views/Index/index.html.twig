@@ -5,6 +5,12 @@
                 <div id="bottom"></div>
                 <div id="chartsview" class="bigchartsresize">
                     <div class="content" >
+                        {% if app.session.hasFlash('notice') %}
+                            <div class="flash-notice">
+                                {{ app.session.flash('notice') }}
+                            </div>
+                        {% endif %}
+                            
                         <ul id="chartslist" class="chartslist">
                             <li id="chartslist_1">
                                 <a class="closebtn" title="Usuń"></a>
@@ -73,57 +79,7 @@
                 </div>
             </div>
             <div id="right">
-                <div id="LGDlg" style="display: none;"></div>
-                <div id="box_login">
-                    <div id="header">
-                        <h4 class="box_header">
-                            <span>Logowanie</span>
-                        </h4>
-                        <div class="box">
-                            {% if app.user %}                      
-                            Jesteś zalogowany jako <strong>{{ app.user.username }}</strong>  <a href="{{ url('logout') }}">Wyloguj</a><br/><br/>
-                            {% else %}
-                            {% if error %}
-                                <div>{{  error.message | trans }}</div><br/>
-                            {% endif %}
-                            <form action="{{ path('login_check') }}" method="post">
-                            <table cellspacing="0" cellpadding="0" border="0" id="login_table">
-                                <tr>
-                                    <td>
-                                        <label for="username" id="username_label">Użytkownik:</label>
-                                        <input class="text-input" type="text" id="username" name="_username" />
-                                    </td>
-                                    <td>
-                                        &nbsp;
-                                    </td>
-                                    <td>
-                                        <label id="password_label">Hasło:</label>
-                                        <input class="text-input" type="password" id="password" name="_password" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br>
-                                        <input class="button" value="Zaloguj" type="submit" name="login" />
-                                    </td>    
-                                </tr>
-                            </table>
-                            </form>
-                            <div class="mbn">
-                                <input id="" type="checkbox" name=""><a href="javascript:imgClick()" class="RememberMeLabel">Zapamiętaj</a>
-                                | 
-                                <a id="" href="profil/rejestracja.aspx">Rejestruj</a>
-                                |
-                                <a id="" href="regeneruj-link.aspx">Aktywuj</a>
-                                |
-                                <a id="" href="profil/odzyskaj-haslo.aspx">Odzyskaj hasło</a>
-                            </div>
-                        {% endif %}
-                        </div>
-
-                    </div>
-
-                </div>
+                {% include 'PortfelIndexBundle:Index:login.html.twig' %}
                 <br/>
                 <div id="box-oragne">
                     <div id="header">

@@ -1,0 +1,74 @@
+{% extends "::base.html.twig" %} 
+
+{% block content %}
+<div id="left">
+    <div class="content">
+        
+        {% if app.session.hasFlash('notice') %}
+            <div class="flash-notice">
+                {{ app.session.flash('notice') }}
+            </div>
+        {% endif %}
+        <br/>
+            <form action="{{ path('register') }}" method="post" {{ form_enctype(form) }}>
+                <table style="border-collapse: separate;border-spacing: 2px;">
+                    <tr>
+                        <td class="register_left">{{ form_label(form.username) }}</td>
+                        <td class="register_center">{{ form_widget(form.username) }}</td>
+                        <td class="register_right">{{ form_errors(form.username) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="register_left">{{ form_label(form.password.password1) }}</td>
+                        <td class="register_center">{{ form_widget(form.password.password1) }}</td>
+                        <td class="register_right">{{ form_errors(form.password) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="register_left">{{ form_label(form.password.password2) }}</td>
+                        <td class="register_center">{{ form_widget(form.password.password2) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="register_left">{{ form_label(form.email) }}</td>
+                        <td class="register_center">{{ form_widget(form.email) }}</td>
+                        <td class="register_right">{{ form_errors(form.email) }}</td>
+                    </tr>
+                </table>
+                    
+                
+                {{ form_rest(form) }}
+                
+                
+                <br/>
+                <input class="button" type="submit" value="Zarejestruj" />
+            </form>
+            <br/>
+        
+
+        </div>
+    </div>
+    <div id="right">
+                {% include 'PortfelIndexBundle:Index:login.html.twig' %}
+            <br/>
+            <div id="box-oragne">
+                <div id="header">
+                    <h4 class="box_header">
+                        <span>Twoje spółki</span>
+                    </h4>
+                    <div class="box-orange">
+                        <div>
+                            <ul>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                            </ul>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
