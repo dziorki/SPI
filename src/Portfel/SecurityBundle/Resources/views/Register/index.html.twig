@@ -3,7 +3,11 @@
 {% block content %}
 <div id="left">
     <div class="content">
-        
+        <h2 style="background: #35caed;">Po co się rejestrować ?</h2><br/>
+		Aby móc otrzymywać informacje o wybranych nowościach w serwisie portfel inwestycyjny.<br/>
+		Aby móc dodawać najlepszych inwestorów do swojej listy ulubionych.<br/>
+		Aby móc kupować akcje i uczestniczyć w konkursach!! oraz wiele innych...<br/><br/>
+		<br/>
         {% if app.session.hasFlash('notice') %}
             <div class="flash-notice">
                 {{ app.session.flash('notice') }}
@@ -40,8 +44,11 @@
                 <br/>
                 <input class="button" type="submit" value="Zarejestruj" />
             </form>
-            <br/>
-        
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div id="dane_osobowe">Wyrażam zgode na przetwarzanie danych osobowych zawartych w formularzu rejestracyjnym w celach promocyjnych i marketingowych zgodnie z Ustawą z 29.08.1997r. o 
+                ochronie danych osobowych (Dz. U. Nr 133, poz. 883) przez portal porfel inwestycyjny<br/>
+                Wyrażam zgodę na otrzymywanie z serwisu informacji handlowych w rozumieniu ustawy z dn. 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (Dz. U. Nr 144, poz. 1204).
+            </div><br/>
 
         </div>
     </div>

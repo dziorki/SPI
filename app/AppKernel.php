@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Portfel\IndexBundle\PortfelIndexBundle(),
             new Portfel\SecurityBundle\PortfelSecurityBundle(),
+            new Portfel\MyPortfelBundle\MyPortfelBundle(),
             new Administrator\AdminBundle\AdministratorAdminBundle(),
         );
 

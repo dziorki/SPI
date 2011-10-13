@@ -8,7 +8,7 @@
                             {% if app.user %}                      
                             Jesteś zalogowany jako <strong>{{ app.user.username }}</strong>  <a href="{{ url('logout') }}">Wyloguj</a><br/><br/>
                             {% else %}
-                            {% if error %}
+                            {% if error is defined ? error : null %}
                                 <div>{{  error.message | trans }}</div><br/>
                             {% endif %}
                             <form action="{{ path('login_check') }}" method="post">

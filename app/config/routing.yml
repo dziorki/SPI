@@ -1,3 +1,7 @@
+MyPortfelBundle:
+    resource: "@MyPortfelBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #AdministratorAdminBundle:
 #    resource: "@AdministratorAdminBundle/Resources/config/routing.yml"
 #    prefix:   /
