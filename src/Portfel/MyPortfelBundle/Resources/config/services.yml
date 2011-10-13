@@ -1,0 +1,7 @@
+parameters:
+#    my_portfel.example.class: Portfel\MyPortfelBundle\Example
+
+services:
+#    my_portfel.example:
+#        class: %my_portfel.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

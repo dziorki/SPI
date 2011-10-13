@@ -1,0 +1,3 @@
+MyPortfelBundle_homepage:
+    pattern:  /my/{name}
+    defaults: { _controller: MyPortfelBundle:My:index }
