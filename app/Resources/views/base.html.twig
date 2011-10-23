@@ -18,18 +18,52 @@
 <script type="text/javascript" src="{{ asset('bundles/portfel/js/jqplot.dateAxisRenderer.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/portfel/js/getAsyncContent.js') }}"></script>
 
+
 </head>
 <body>
     <!-- wrapper -->
     <div id="wrapper">
+        <div id="top-menu">
+        {% include 'PortfelIndexBundle:Index:menu.html.twig' %}
+        </div>
         <div id="top">
             <a href="{{ path('_welcome') }}">
                 <img src="{{ asset('bundles/portfel/images/logo.png') }}" alt="Symfony">
             </a>
         </div>
         <div id="middle">
-        {% block content%}
-        {% endblock  %}
+            <div id="left">
+                <div class="content">
+                {% block content%}
+                {% endblock  %}
+                </div>
+            </div>
+            <div id="right">
+                {% include 'PortfelIndexBundle:Index:login.html.twig' %}
+                <br/>
+                <div id="box-oragne">
+                    <div id="header">
+                        <h4 class="box_header">
+                            <span>Twoje spółki</span>
+                        </h4>
+                        <div class="box-orange">
+                            <div>
+                                <ul>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li>
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                                <li><a onclick="Model.addchart(131)">VENO</a></li>
+                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
+                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
+                                </ul>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div style="float:left;margin-top: 300px;"></div>
     </div><!-- wrapper -->

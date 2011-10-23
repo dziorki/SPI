@@ -1,0 +1,45 @@
+<h1>Operation</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Account</th>
+            <td>{{ entity.account }}</td>
+        </tr>
+        <tr>
+            <th>Provision</th>
+            <td>{{ entity.provision }}</td>
+        </tr>
+        <tr>
+            <th>Ammount</th>
+            <td>{{ entity.ammount }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('operation') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('operation_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('operation_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

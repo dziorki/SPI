@@ -12,6 +12,8 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
+        fos_userbundle:
+            id: fos_user.user_manager
 #        in_memory:
 #            users:
 #                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
@@ -25,15 +27,16 @@ security:
             security: false
         main:
             pattern:    ^/
-            anonymous: ~
             form_login:
-                login_path: /user/login
+                provider: fos_userbundle
+                login_path: /
                 check_path: /user/login_check
                 post_only: true
                 use_referer: false
                 always_use_default_target_path: true
-                remember_me: true
-                
+                default_target_path: /my
+#                remember_me: true
+            anonymous:    true   
             logout:
                 path:   /user/logout
                 target: /
@@ -45,7 +48,15 @@ security:
             remember_me:
                 key:      "a09aec011a0668194f6ce3a992d8c4b3fa821c32"
                 lifetime: 1
-                path:     /
-                domain:   ~ 
+                name: portfel
+                path: /
+                domain: ~ 
+                always_remember_me: false
+                remember_me_parameter: _remember_me
+                secure: true
     access_control:
-            - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/change, role: ROLE_USER }
+        - { path: ^/admin/, role: ROLE_ADMIN }

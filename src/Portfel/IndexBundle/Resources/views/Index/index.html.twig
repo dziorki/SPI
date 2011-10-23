@@ -1,10 +1,9 @@
 {% extends "::base.html.twig" %} 
 
 {% block content %}
-            <div id="left">
                 <div id="bottom"></div>
                 <div id="chartsview" class="bigchartsresize">
-                    <div class="content" >
+
                         {% if app.session.hasFlash('notice') %}
                             <div class="flash-notice">
                                 {{ app.session.flash('notice') }}
@@ -69,39 +68,10 @@
                             </li>
                         </ul>
                         <div class="clr"></div>
-                    </div>
+
 
                 </div>
                 <div class="clr"></div>
 
-                <div class="content">
-                    
-                </div>
-            </div>
-            <div id="right">
-                {% include 'PortfelIndexBundle:Index:login.html.twig' %}
-                <br/>
-                <div id="box-oragne">
-                    <div id="header">
-                        <h4 class="box_header">
-                            <span>Twoje spółki</span>
-                        </h4>
-                        <div class="box-orange">
-                            <div>
-                                <ul>
-                                <li><a onclick="Model.addchart(131)">VENO</a></li>
-                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
-                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li>
-                                <li><a onclick="Model.addchart(131)">VENO</a></li>
-                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
-                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
-                                <li><a onclick="Model.addchart(131)">VENO</a></li>
-                                <li><a onclick="Model.addchart(132)">CDRED</a></li>
-                                <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
-                                </ul>   
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 {% endblock %}

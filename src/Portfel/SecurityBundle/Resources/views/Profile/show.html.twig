@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+    <p>Zmień hasło: <a href="{{ path('fos_user_change_password') }}"> zmień</a></p>
+</div>
+{% endblock %}

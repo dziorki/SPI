@@ -1,37 +1,66 @@
 {% extends "::base.html.twig" %} 
-
 {% block content %}
-<div id="left">
-    <div class="content">
-	Hello {{ name }}!
-    </div>
-</div>
-<div id="right">
-                {% include 'PortfelIndexBundle:Index:login.html.twig' %}
-	<br/>
-	<div id="box-oragne">
-	    <div id="header">
-		<h4 class="box_header">
-		    <span>Twoje spółki</span>
-		</h4>
-		<div class="box-orange">
-		    <div>
-			<ul>
-			    <li><a onclick="Model.addchart(131)">VENO</a></li>
-			    <li><a onclick="Model.addchart(132)">CDRED</a></li>
-			    <li><a onclick="Model.addchart(133)">BORYSZEW</a></li>
-			    <li><a onclick="Model.addchart(131)">VENO</a></li>
-			    <li><a onclick="Model.addchart(132)">CDRED</a></li>
-			    <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
-			    <li><a onclick="Model.addchart(131)">VENO</a></li>
-			    <li><a onclick="Model.addchart(132)">CDRED</a></li>
-			    <li><a onclick="Model.addchart(133)">BORYSZEW</a></li> 
-			</ul>   
-		    </div>
-		</div>
-	    </div>
-	</div>
-    </div>
+
+{% if app.user %}
+
+<h1>Zarządzanie moimi portfelami</h1>
+Aktualnie posiadany kapitał: 0.00 PLN<br/>
+Łączna wartość posiadanych walorów: 0.00 PLN<br/>
+Zysk z dotychczas sprzedanych walorów: 0.00 PLN<br/>
+Łączny zysk od początku inwestowania: 0.00 PLN<br/><br/>
+
+{% if entities %}
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nazwa portfelu</th>
+            <th>Data utworzenia</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% set id = 0 %}
+    {% for entity in entities %}
+            {% set id = id + 1%}
+            <tr>
+                <td><a href="{{ path('my_show', { 'id': entity.id }) }}">{{ id }}.</a></td>
+                <td><a href="{{ path('my_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{% if entity.createat %}{{ entity.createat|date('Y-m-d H:i:s') }}{% endif%}</td>
+                <td>
+                    <a href="{{ path('my_show', { 'id': entity.id }) }}">pokaż</a>
+                <td>
+                    <a href="{{ path('my_edit', { 'id': entity.id }) }}">edytuj</a></td>
+                </td>
+            </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+<ul>
+    <li>
+        <a href="{{ path('my_new') }}">
+            Dodaj nowy portfel
+        </a>
+    </li>
+</ul>
+
+{% else %}
+
+<h1>Mój Portfel</h1>
+Teraz w jednym miejscu możesz kontrolować swoje inwestycje i oszczędności.<br/><br/>
+
+Codziennie możesz sprawdzać stan swojego portfela. <br/>
+Przekonaj się, czy twoje inwestycje mogą przynieść zyski. <br/><br/>
+
+Wyliczenia w Portfelu oparte są na prawdziwych, aktualnych notowaniach, więc poczujesz się jakbyś był prawdziwym inwestorem.<br/>
+<a href="{{ url('fos_user_register') }}">Zarejestruj się i rozpocznij przygodę z rynkami finansowymi!</a>
+<br/><br/>
+<img src="{{ asset('bundles/portfel/images/portfel-inwestycyjny.jpg') }}" alt="Portfel inwestycyjny">
+
+{% endif %}
+
 {% endblock %}
-
-

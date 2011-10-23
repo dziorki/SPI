@@ -1,3 +1,13 @@
-MyPortfelBundle_homepage:
-    pattern:  /my/{name}
-    defaults: { _controller: MyPortfelBundle:My:index }
+portfel:
+    pattern:   /my/{id}/portfel
+    defaults:  { _controller: MyPortfelBundle:Operation:index }
+
+my:
+    resource: "@MyPortfelBundle/Controller/MyController.php"
+    type:     annotation 
+    prefix:  /
+    
+operation:
+    resource: "@MyPortfelBundle/Controller/OperationController.php"
+    type:     annotation 
+    prefix:  /

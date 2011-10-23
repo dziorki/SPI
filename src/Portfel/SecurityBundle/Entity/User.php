@@ -2,7 +2,7 @@
 
 namespace Portfel\SecurityBundle\Entity;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @DoctrineAssert\UniqueEntity(fields="username", message="Podany login jest już zajęty.")
  * @DoctrineAssert\UniqueEntity(fields="email", message="Podany adres e-mail jest już zajęty.")
  */
-class User implements UserInterface {
-
+class User extends BaseUser
+{
     /**
      * @ORM\Id
      * @ORM\Column(type="integer",nullable=false)
@@ -24,129 +24,31 @@ class User implements UserInterface {
     protected $id;
 
     /**
-     * @ORM\Column(type="string", unique="true", length=10)
-     */
-    protected $username;
-
-    /**
-     * @ORM\Column(type="string", length=128)
-     */
-    protected $password;
-
-    /**
-     * @ORM\Column(type="string", unique="true", length="30")
-     * 
-     */
-    protected $email;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     protected $create_at;
     
     /**
-     * @ORM\Column(type="string", length="5")
+     * @ORM\OneToMany(targetEntity="Portfel\MyPortfelBundle\Entity\Wallet", mappedBy="user")
      */
-    protected $salt;
+    protected $wallet;
 
-    /**
-     * Generate a new salt - can't be done as prepersist because we need it before then
-     */
-    public function initSalt() {
-        $this->salt = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
+    public function __construct()
+    {
+        parent::__construct();
+        $this->create_at = new \DateTime('now');
+        $this->wallet = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    /**
-     * Remove sensitive information from the user object
-     */
-    public function eraseCredentials() {
-        $this->password = "";
-        $this->salt = "";
-    }
-    
-    /**
-     * Is the provided user the same as "this"?
-     *
-     * @return bool
-     */
-    public function equals(UserInterface $user) {
-        if($user->email !== $this->email) {
-            return false;
-        }
 
-        return true;
-    }
-    
-    /**
-     * Get the list of roles for the user
-     *
-     * @return string array
-     */
-    public function getRoles() {
-        return array("ROLE_USER");
-    }
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     */
-    public function setUsername($username) {
-        $this->username = $username;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername() {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     */
-    public function setPassword($password) {
-        $this->password = $password;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword() {
-        return $this->password;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email) {
-        $this->email = $email;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail() {
-        return $this->email;
     }
 
     /**
@@ -154,7 +56,8 @@ class User implements UserInterface {
      *
      * @param datetime $createAt
      */
-    public function setCreateAt($createAt) {
+    public function setCreateAt($createAt)
+    {
         $this->create_at = $createAt;
     }
 
@@ -163,35 +66,36 @@ class User implements UserInterface {
      *
      * @return datetime 
      */
-    public function getCreateAt() {
+    public function getCreateAt()
+    {
         return $this->create_at;
     }
-    /**
-     *
-     * @Assert\True(message = "Hasło nie może zawierać loginu")
-     */
-    public function isPasswordLegal() {
-        return !preg_match('/'.$this->username.'/', $this->password);
 
+    /**
+     * Add wallet
+     *
+     * @param Portfel\MyPortfelBundle\Entity\Wallet $wallet
+     */
+    public function addWallet(\Portfel\MyPortfelBundle\Entity\Wallet $wallet)
+    {
+        $this->wallet[] = $wallet;
+    }
+
+    /**
+     * Get wallet
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getWallet()
+    {
+        return $this->wallet;
     }
     
     /**
-     * Set salt
-     *
-     * @param string $salt
+     * Generate a new salt - can't be done as prepersist because we need it before then
      */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
+    public function initSalt() {
+        $this->salt = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',5)),0,5);
     }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
+    
 }

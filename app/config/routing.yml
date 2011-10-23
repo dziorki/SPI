@@ -18,19 +18,19 @@ PortfelSecurityBundle:
 _welcome:
     pattern:  /
     defaults: { _controller: PortfelIndexBundle:Index:index }
-       
-login:
-    pattern:   /user/login
-    defaults:  { _controller: PortfelSecurityBundle:Security:login }
-    
-login_check:
-    pattern:   /user/login_check
-    
-logout:
-    pattern:  /user/logout
-    defaults: { _controller: PortfelSecurityBundle:Security:logout }
-
-admin:
-    pattern:  /admin
-    defaults: { _controller: AdministratorAdminBundle:Admin:index }
+#       
+#login:
+#    pattern:   /user/login
+#    defaults:  { _controller: PortfelSecurityBundle:Security:login }
+#    
+#login_check:
+#    pattern:   /user/login_check
+#    
+#logout:
+#    pattern:  /user/logout
+#    defaults: { _controller: PortfelSecurityBundle:Security:logout }
+#
+#admin:
+#    pattern:  /admin
+#    defaults: { _controller: AdministratorAdminBundle:Admin:index }
    

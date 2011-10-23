@@ -1,3 +1,4 @@
 The presented password cannot be empty.: Proszę podać hasło. Pole nie może być puste.
 The presented password is invalid.: Podane hasło jest niepoprawne.
 Bad credentials: Wybrany login nieistnieje.
+could not find driver: Błąd połączenia!

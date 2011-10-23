@@ -6,12 +6,13 @@
                         </h4>
                         <div class="box">
                             {% if app.user %}                      
-                            Jesteś zalogowany jako <strong>{{ app.user.username }}</strong>  <a href="{{ url('logout') }}">Wyloguj</a><br/><br/>
+                            Jesteś zalogowany jako <strong>{{ app.user.username }}</strong>  <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a><br/><br/>
                             {% else %}
+                            {% block fos_user_content %}
                             {% if error is defined ? error : null %}
-                                <div>{{  error.message | trans }}</div><br/>
+                                <div>{{ error }}</div>
                             {% endif %}
-                            <form action="{{ path('login_check') }}" method="post">
+                            <form action="{{ path('fos_user_security_check') }}" method="post">
                             <table cellspacing="0" cellpadding="0" border="0" id="login_table">
                                 <tr>
                                     <td>
@@ -37,13 +38,15 @@
                             <div class="mbn">
                                 <input id="remember_me" type="checkbox" name="_remember_me"><a href="#" id="remember_click">Zapamiętaj</a>
                                 | 
-                                <a href="{{ url('register') }}">Rejestruj</a>
+                                <a href="{{ path('fos_user_register') }}">Rejestruj</a>
                                 |
                                 <a id="" href="pomoc">Pomoc</a>
                                 |
-                                <a id="" href="remember">Odzyskaj hasło</a>
+                                <a id="" href="{{ path('fos_user_change_password') }}">Odzyskaj hasło</a>
                             </div>
-                        {% endif %}
+                            {% endblock fos_user_content %}
+                            {% endif %}
+                                
                         </div>
 
                     </div>

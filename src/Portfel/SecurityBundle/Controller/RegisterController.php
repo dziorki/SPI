@@ -3,59 +3,44 @@
 namespace Portfel\SecurityBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
 use Portfel\SecurityBundle\Entity\User;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Portfel\SecurityBundle\Form\Type\UserType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Controller\RegistrationController as BaseController;
 
-class RegisterController extends Controller {
+class RegisterController extends BaseController {
+    
+    
+    public function registerAction()
+    {
+        $form = $this->container->get('fos_user.registration.form');
+        $formHandler = $this->container->get('fos_user.registration.form.handler');
+        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
 
-    /**
-     *
-     */
-    public function addAction(Request $request) {
+        $process = $formHandler->process($confirmationEnabled);
+        if ($process) {
+            $user = $form->getData();
 
-
-        $user = new User();
-        $form = $this->createForm(new UserType(),$user);
-
-
-
-
-        if ($request->getMethod() == 'POST') {
-
-            $form->bindRequest($request);
-
-            if ($form->isValid()) {
-
-                    $user->setCreateAt(new \DateTime('now'));
-                    $user->initSalt();
-                    $factory = $this->get('security.encoder_factory');
-                    $encoder = $factory->getEncoder($user);
-                    $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                    $user->setPassword($password);
-                    
-                    $em = $this->getDoctrine()->getEntityManager();
-                    $em->persist($user);
-                    $em->flush();
-
-
-                    $this->get('session')->setFlash('notice', 'Created user id: ' . $user->getId());
-                    return $this->redirect($this->generateUrl('_welcome'));
-
+            if ($confirmationEnabled) {
+                $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
+                $route = 'fos_user_registration_check_email';
+            } else {
+                $this->authenticateUser($user);
+                $route = '_welcome';
             }
+
+            $this->setFlash('fos_user_success', 'registration.flash.user_created');
+            $url = $this->container->get('router')->generate($route);
+
+            return new RedirectResponse($url);
         }
 
 
-
-
-        return $this->render('PortfelSecurityBundle:Register:index.html.twig', array(
-                    'error' => null,
-                    'form' => $form->createView(),
-                ));
+        return $this->container->get('templating')->renderResponse('PortfelSecurityBundle:Register:index.html.twig', array(
+            'error' => null,
+            'form' => $form->createView(),
+            'theme' => $this->container->getParameter('fos_user.template.theme'),
+        ));
     }
-
 }
-
-//TODO Sprawdzanie loginu w hasle przestalo dzialac

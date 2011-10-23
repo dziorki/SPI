@@ -1,3 +1,34 @@
-register:
-    pattern:  /register
-    defaults: { _controller: PortfelSecurityBundle:Register:add }
+#register:
+#    pattern:  /register
+#    defaults: { _controller: PortfelSecurityBundle:Register:register }
+
+
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /user/profile
+
+#fos_user_register:
+#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#    prefix: /register
+
+fos_user_register:
+    pattern:  /user/register
+    defaults: { _controller: PortfelSecurityBundle:Register:register }
+   
+fos_user_change_password:
+    pattern:  /user/change
+    defaults: { _controller: PortfelSecurityBundle:ChangePassword:changePassword }
+    
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /user
+
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /user
+    
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group

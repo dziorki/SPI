@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Portfel\SecurityBundle\PortfelSecurityBundle(),
             new Portfel\MyPortfelBundle\MyPortfelBundle(),
             new Administrator\AdminBundle\AdministratorAdminBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
