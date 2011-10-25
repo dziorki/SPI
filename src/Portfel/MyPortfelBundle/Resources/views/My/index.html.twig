@@ -25,11 +25,11 @@ Zysk z dotychczas sprzedanych walorów: 0.00 PLN<br/>
     {% for entity in entities %}
             {% set id = id + 1%}
             <tr>
-                <td><a href="{{ path('my_show', { 'id': entity.id }) }}">{{ id }}.</a></td>
-                <td><a href="{{ path('my_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td><a href="{{ path('operation', { 'wallet_id': entity.id }) }}">{{ id }}.</a></td>
+                <td><a href="{{ path('operation', { 'wallet_id': entity.id }) }}">{{ entity.name }}</a></td>
                 <td>{% if entity.createat %}{{ entity.createat|date('Y-m-d H:i:s') }}{% endif%}</td>
                 <td>
-                    <a href="{{ path('my_show', { 'id': entity.id }) }}">pokaż</a>
+                    <a href="{{ path('operation', { 'wallet_id': entity.id }) }}">pokaż</a>
                 <td>
                     <a href="{{ path('my_edit', { 'id': entity.id }) }}">edytuj</a></td>
                 </td>

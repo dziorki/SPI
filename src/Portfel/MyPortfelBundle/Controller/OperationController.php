@@ -12,35 +12,42 @@ use Portfel\MyPortfelBundle\Form\OperationType;
 /**
  * Operation controller.
  *
- * @Route("/my")
+ * @Route("/my/{wallet_id}/portfel")
  */
 class OperationController extends Controller
 {
     /**
      * Lists all Operation entities.
      *
-     * @Route("/{id}/portfel", name="operation")
+     * @Route("/", name="operation")
      * @Template()
      */
-    public function indexAction($id)
+    public function indexAction($wallet_id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('MyPortfelBundle:Operation')->findOneBy(array('wallet_id' => $id));
+        //$entities = $em->getRepository('MyPortfelBundle:Operation')->findBy(array('wallet' => $wallet_id));
+        $query = $em->getRepository('MyPortfelBundle:Operation');
+	$entities = $query->createQueryBuilder('w')
+		->where('w.wallet = :wallet_id')
+		->setParameter('wallet_id', $wallet_id)
+		->groupBy('w.company')
+		->getQuery()
+		->getResult();
 
         return array(
             'entities' => $entities,
-            'wallet_id' => $id
+            'wallet_id' => $wallet_id
         );
     }
 
     /**
      * Finds and displays a Operation entity.
      *
-     * @Route("/{id}/portfel/walor/", name="my_show")
+     * @Route("/{id}/operacja", name="operation_show")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($wallet_id, $id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
@@ -54,35 +61,38 @@ class OperationController extends Controller
 
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'delete_form' => $deleteForm->createView(),
+	    'wallet_id' => $wallet_id
+	    );
     }
 
     /**
      * Displays a form to create a new Operation entity.
      *
-     * @Route("/{id}/portfel/walor/nowy", name="operation_new")
+     * @Route("/nowy", name="operation_new")
      * @Template()
      */
-    public function newAction($id)
+    public function newAction($wallet_id)
     {
+
         $entity = new Operation();
         $form   = $this->createForm(new OperationType(), $entity);
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'wallet_id' => $id
+	    'wallet_id' => $wallet_id
         );
     }
 
     /**
      * Creates a new Operation entity.
      *
-     * @Route("/{id}/portfel/walor/stworz", name="operation_create")
+     * @Route("/stworz", name="operation_create")
      * @Method("post")
      * @Template("MyPortfelBundle:Operation:new.html.twig")
      */
-    public function createAction($id)
+    public function createAction()
     {
         $entity  = new Operation();
         $entity->setWalletId($id);
@@ -110,7 +120,7 @@ class OperationController extends Controller
     /**
      * Displays a form to edit an existing Operation entity.
      *
-     * @Route("/walor/edit/{id}", name="operation_edit")
+     * @Route("/{id}/edit", name="operation_edit")
      * @Template()
      */
     public function editAction($id)
@@ -136,7 +146,7 @@ class OperationController extends Controller
     /**
      * Edits an existing Operation entity.
      *
-     * @Route("/walor/aktualizuj/{id}", name="operation_update")
+     * @Route("/aktualizuj", name="operation_update")
      * @Method("post")
      * @Template("MyPortfelBundle:Operation:edit.html.twig")
      */
@@ -174,7 +184,7 @@ class OperationController extends Controller
     /**
      * Deletes a Operation entity.
      *
-     * @Route("/walor/usun/{id}", name="operation_delete")
+     * @Route("/usun", name="operation_delete")
      * @Method("post")
      */
     public function deleteAction($id)
@@ -206,4 +216,23 @@ class OperationController extends Controller
             ->getForm()
         ;
     }
+
+//    /**
+//     * Lists all Operation entities.
+//     *
+//     * @Route("/", name="operation")
+//     * @Template()
+//     */
+//    public function indexAction($wallet_id)
+//    {
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        $entities = $em->getRepository('MyPortfelBundle:Operation')->findBy(array('wallet' => $wallet_id));
+//
+//        return array(
+//            'entities' => $entities,
+//            'wallet_id' => $wallet_id
+//        );
+//    }
 }
+

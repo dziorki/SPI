@@ -195,7 +195,7 @@ class MyController extends Controller {
 //    /**
 //     * Finds and displays a Wallet entity.
 //     *
-//     * @Route("/{id}/portfel", name="my_show")
+//     * @Route("/portfel/{id}", name="my_show")
 //     * @Template()
 //     */
 //    public function showAction($id) {

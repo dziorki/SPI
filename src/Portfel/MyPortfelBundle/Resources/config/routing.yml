@@ -1,6 +1,6 @@
-portfel:
-    pattern:   /my/{id}/portfel
-    defaults:  { _controller: MyPortfelBundle:Operation:index }
+#portfel:
+#    pattern:   /my/{id}/portfel
+#    defaults:  { _controller: MyPortfelBundle:Operation:index }
 
 my:
     resource: "@MyPortfelBundle/Controller/MyController.php"
