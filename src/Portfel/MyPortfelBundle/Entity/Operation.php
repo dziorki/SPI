@@ -32,19 +32,19 @@ class Operation {
     protected $wallet;
     
     /**
-     * @ORM\Column(type="string", unique="true", length=50)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      */
     protected $account;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      */
     protected $provision;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      */
-    protected $ammount;    
+    protected $amount;    
     
     /**
      * @ORM\Column(type="datetime")
@@ -102,23 +102,23 @@ class Operation {
     }
 
     /**
-     * Set ammount
+     * Set amount
      *
-     * @param integer $ammount
+     * @param integer $amount
      */
-    public function setAmmount($ammount)
+    public function setAmount($amount)
     {
-        $this->ammount = $ammount;
+        $this->amount = $amount;
     }
 
     /**
-     * Get ammount
+     * Get amount
      *
      * @return integer 
      */
-    public function getAmmount()
+    public function getAmount()
     {
-        return $this->ammount;
+        return $this->amount;
     }
 
     /**
@@ -180,5 +180,6 @@ class Operation {
     {
         return $this->wallet;
     }
+
 
 }

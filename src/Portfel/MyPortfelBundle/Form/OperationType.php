@@ -13,7 +13,7 @@ class OperationType extends AbstractType
             ->add('company')
             ->add('account')
             ->add('provision')
-            ->add('ammount')
+            ->add('amount')
             
         ;
     }

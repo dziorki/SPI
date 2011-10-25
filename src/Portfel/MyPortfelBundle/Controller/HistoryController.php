@@ -10,7 +10,7 @@ use Portfel\MyPortfelBundle\Entity\Operation;
 use Portfel\MyPortfelBundle\Form\OperationType;
 
 /**
- * Operation controller.
+ * History controller.
  *
  * @Route("/my/{wallet_id}/portfel")
  */
@@ -29,7 +29,7 @@ class OperationController extends Controller
         //$entities = $em->getRepository('MyPortfelBundle:Operation')->findBy(array('wallet' => $wallet_id));
         //$query = $em->getRepository('MyPortfelBundle:Operation');
 //	$entities = $em->createQuery('
-//                    SELECT c.name as company, sum(o.account) AS account, sum(o.provision) AS provision, sum(o.amount) AS amount 
+//                    SELECT c.name as company, sum(o.account) AS account, sum(o.provision) AS provision, sum(o.ammount) AS ammount 
 //                    FROM MyPortfelBundle:Operation o 
 //                    JOIN o.company c
 //                    WHERE o.wallet = :wallet_id
@@ -38,7 +38,7 @@ class OperationController extends Controller
 //                ->getResult();
 //                
                 
-        $entities = $em->createQueryBuilder()
+                $entities = $em->createQueryBuilder()
                 
                 ->select(array('c.name as company', 'sum(o.account) as account', 'sum(o.provision) as provision', 'sum(o.amount) as amount'))
                 ->from('MyPortfelBundle:Operation','o')
@@ -58,57 +58,27 @@ class OperationController extends Controller
     /**
      * Finds and displays a Operation entity.
      *
-     * @Route("/historia/{name}", name="history_show")
+     * @Route("/{id}/operacja", name="operation_show")
      * @Template()
      */
-    public function historyAction($wallet_id, $name)
+    public function showAction($wallet_id, $id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->createQueryBuilder()
-                
-                ->select(array('o.date', 'c.name as company', 'o.account', 'o.provision', 'o.amount'))
-                ->from('MyPortfelBundle:Operation','o')
-                ->join('o.company','c')
-		->where('o.wallet = :wallet_id','c.name = :name')
-		->setParameter('wallet_id', $wallet_id)
-		->setParameter('name', $name)
-		->getQuery()
-		->getResult();
+        $entity = $em->getRepository('MyPortfelBundle:Operation')->find($id);
 
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Operation entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entities'      => $entities,
-	    'wallet_id' => $wallet_id,
-            'company_name' => $name
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+	    'wallet_id' => $wallet_id
 	    );
     }
-    
-//    /**
-//     * Finds and displays a Operation entity.
-//     *
-//     * @Route("/historia/{name}", name="operation_show")
-//     * @Template()
-//     */
-//    public function showAction($wallet_id, $name)
-//    {
-//        $em = $this->getDoctrine()->getEntityManager();
-//
-//        $entity = $em->getRepository('MyPortfelBundle:Operation')->findBy(array('wallet' => $wallet_id));
-//
-//        if (!$entity) {
-//            throw $this->createNotFoundException('Unable to find Operation entity.');
-//        }
-//
-//        $deleteForm = $this->createDeleteForm($id);
-//
-//        return array(
-//            'entity'      => $entity,
-//            'delete_form' => $deleteForm->createView(),
-//	    'wallet_id' => $wallet_id,
-//            'company_name' => $name
-//	    );
-//    }
 
     /**
      * Displays a form to create a new Operation entity.
@@ -136,32 +106,27 @@ class OperationController extends Controller
      * @Method("post")
      * @Template("MyPortfelBundle:Operation:new.html.twig")
      */
-    public function createAction($wallet_id)
+    public function createAction()
     {
-        $operation  = new Operation();
+        $entity  = new Operation();
+        $entity->setWalletId($id);
+        $entity->setDate(new \DateTime('now'));
         
-        $em = $this->getDoctrine()->getEntityManager();
-        $wallet = $em->getRepository('MyPortfelBundle:Wallet')->find($wallet_id);
-
-        
-        $operation->setWallet($wallet);
-        $operation->setDate(new \DateTime('now'));
-
         $request = $this->getRequest();
-        $form    = $this->createForm(new OperationType(), $operation);
+        $form    = $this->createForm(new OperationType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($operation);
+            $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('operation', array('wallet_id' => $wallet_id)));
+            return $this->redirect($this->generateUrl('operation_show', array('id' => $entity->getId())));
             
         }
 
         return array(
-            'entity' => $operation,
+            'entity' => $entity,
             'form'   => $form->createView()
         );
     }
