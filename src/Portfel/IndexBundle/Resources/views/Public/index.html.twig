@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %} 
+
+{% block content %}
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Właściciel</th>
+            <th>Nazwa portfela</th>
+            <th>Data utworzenia</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.user }}</td>
+            <td><a href="{{ path('public_portfel', {'id':entity.id}) }}">{{ entity.name }}</a></td>
+            <td>{{ entity.createAt |date('Y-m-d H:i:s') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,7 +1,5 @@
-<div class="sf-exceptionreset">
-
-    <div class="block_exception">
-        <div class="block_exception_detected clear_fix">
+{% extends "::base.html.twig" %} 
+{% block content %}
             <div class="illustration_exception">
                 <img alt="Exception detected!" src="{{ asset('bundles/framework/images/exception_detected.gif') }}"/>
             </div>
@@ -37,8 +35,7 @@
                 </div>
 
             </div>
-        </div>
-    </div>
 
-</div>
 
+
+{% endblock %}

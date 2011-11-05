@@ -12,8 +12,8 @@ class OperationType extends AbstractType
         $builder
             ->add('company')
             ->add('account')
-            ->add('provision')
-            ->add('amount')
+            ->add('provision', 'money', array('currency' => 'PLN', 'precision' => 2))
+            ->add('amount', 'money', array('currency' => 'PLN', 'precision' => 2))
             
         ;
     }

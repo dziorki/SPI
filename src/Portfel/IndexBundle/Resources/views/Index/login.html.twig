@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>
                                         <br>
-                                        <input class="button" value="Zaloguj" type="submit" name="login" />
+                                        <button class="action blue" type="submit" name="login"><span class="label">Zaloguj</span></button>
                                     </td>    
                                 </tr>
                             </table>
@@ -42,7 +42,7 @@
                                 |
                                 <a id="" href="pomoc">Pomoc</a>
                                 |
-                                <a id="" href="{{ path('fos_user_change_password') }}">Odzyskaj hasło</a>
+                                <a id="" href="{{ path('fos_user_resetting') }}">Odzyskaj hasło</a>
                             </div>
                             {% endblock fos_user_content %}
                             {% endif %}

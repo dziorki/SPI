@@ -16,22 +16,6 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        return array(
-            'error' => null
-        );
-    }
-
-    /**
-     * @Route("/hello", name="_hello")
-     * @Template()
-     */
-    public function helloAction()
-    {
-
-        return array(
-            // last username entered by the user
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error,
-        );
+        return array();
     }
 }

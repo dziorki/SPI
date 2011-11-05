@@ -1,3 +1,19 @@
-hello:
-    pattern:  /hello
-    defaults: { _controller: PortfelIndexBundle:Default:hello }
+_welcome:
+    pattern:  /
+    defaults: { _controller: PortfelIndexBundle:Index:index }
+
+public:
+    pattern:  /public
+    defaults: { _controller: PortfelIndexBundle:Public:index }
+    
+public_portfel:
+    pattern:  /public/portfel/{id}
+    defaults: { _controller: PortfelIndexBundle:Public:wallet }
+    
+public_history:
+    pattern:  /public/{id}/historia/{name}
+    defaults: { _controller: PortfelIndexBundle:Public:history }
+    
+public_pie:
+    pattern:  /public/pie/{id}
+    defaults: { _controller: PortfelIndexBundle:Public:pie, _format: json }

@@ -3,11 +3,7 @@
 
 {% if app.user %}
 
-<h1>Zarządzanie moimi portfelami</h1>
-Aktualnie posiadany kapitał: 0.00 PLN<br/>
-Łączna wartość posiadanych walorów: 0.00 PLN<br/>
-Zysk z dotychczas sprzedanych walorów: 0.00 PLN<br/>
-Łączny zysk od początku inwestowania: 0.00 PLN<br/><br/>
+{% include 'MyPortfelBundle:My:top.html.twig' %}
 
 {% if entities %}
 <table class="records_list">
@@ -40,13 +36,8 @@ Zysk z dotychczas sprzedanych walorów: 0.00 PLN<br/>
 
 {% endif %}
 
-<ul>
-    <li>
-        <a href="{{ path('my_new') }}">
-            Dodaj nowy portfel
-        </a>
-    </li>
-</ul>
+<br/>
+<button class="action blue"><a href="{{ path('my_new') }}"><span class="label">Dodaj portfel</span></a></buttom>
 
 {% else %}
 

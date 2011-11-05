@@ -32,7 +32,7 @@ class Operation {
     protected $wallet;
     
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected $account;
 
@@ -42,7 +42,7 @@ class Operation {
     protected $provision;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false )
      */
     protected $amount;    
     

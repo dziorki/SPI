@@ -1,3 +1,7 @@
+PortfelIndexBundle:
+    resource: "@PortfelIndexBundle/Resources/config/routing.yml"
+    prefix:   /
+
 MyPortfelBundle:
     resource: "@MyPortfelBundle/Resources/config/routing.yml"
     prefix:   /
@@ -9,28 +13,3 @@ MyPortfelBundle:
 PortfelSecurityBundle:
     resource: "@PortfelSecurityBundle/Resources/config/routing.yml"
     prefix:   /
-    
-#    
-#PortfelIndexBundle:
-#    resource: "@PortfelIndexBundle/Resources/config/routing.yml"
-#    prefix:   /
-
-_welcome:
-    pattern:  /
-    defaults: { _controller: PortfelIndexBundle:Index:index }
-#       
-#login:
-#    pattern:   /user/login
-#    defaults:  { _controller: PortfelSecurityBundle:Security:login }
-#    
-#login_check:
-#    pattern:   /user/login_check
-#    
-#logout:
-#    pattern:  /user/logout
-#    defaults: { _controller: PortfelSecurityBundle:Security:logout }
-#
-#admin:
-#    pattern:  /admin
-#    defaults: { _controller: AdministratorAdminBundle:Admin:index }
-   

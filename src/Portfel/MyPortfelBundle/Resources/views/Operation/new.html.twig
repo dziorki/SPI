@@ -1,20 +1,17 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
 
-<h1>Operation creation</h1>
+{% include 'MyPortfelBundle:My:top.html.twig' %}
+
+<br/><br/><br/><br/>
 
 <form action="{{ path('operation_create', { 'wallet_id': wallet_id }) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+    <br/>
+    <button class="action blue" type="submit"><span class="label">Dodaj</span></button>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('operation', { 'wallet_id' : wallet_id }) }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+
+<button class="action green"><a href="{{ path('operation', { 'wallet_id' : wallet_id }) }}"><span class="label">Wróć</span></a></button>
+
 {% endblock %}

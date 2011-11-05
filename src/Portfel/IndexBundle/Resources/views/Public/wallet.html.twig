@@ -1,8 +1,6 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
 
-{% include 'MyPortfelBundle:My:top.html.twig' %}
-
 <table class="records_list">
     <thead>
         <tr>
@@ -10,22 +8,28 @@
             <th>Ilość</th>
             <th>Prowizja</th>
             <th>Wartość</th>
+            <th>Procent portfela</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-	    <td><a href="{{ path('history_show', { 'name' : entity.company, 'wallet_id' : wallet_id }) }}">{{ entity.company }}</a></td>
+	    <td><a href="{{ path('public_history', { 'name' : entity.company, 'id' : wallet_id }) }}">{{ entity.company }}</a></td>
             <td>{{ entity.account }}</td>
             <td>{{ entity.provision }}</td>
+            <td>{{ entity.amount }}</td>
             <td>{{ entity.amount }}</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 <br/>
-<button class="action green"><a href="{{ path('operation_new', { 'wallet_id' : wallet_id }) }}"><span class="label">Kup</span></a></button>
-<button class="action red"><a href="{{ path('operation_new', { 'wallet_id' : wallet_id }) }}"><span class="label">Sprzedaj</span></a></button>
+
+<button class="action red"><a href="{{ path('_welcome') }}"><span class="label">Dodaj do ulubionych</span></a></button>
+
+
+<br/><br/>
+
 {% if entities %}
 <div id="pie" style="width: 670px; height: 260px; margin: 0 auto"></div>
 
@@ -37,4 +41,5 @@
     });
 </script>
 {% endif %}
+
 {% endblock %}

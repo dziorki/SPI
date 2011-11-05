@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Typ operacji</th>
+            <th>Akcje</th>
+            <th>Ilość</th>
+            <th>Prowizja</th>
+            <th>Wartość</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td></td>
+	    <td><a href="{{ path('public_history', { 'name' : entity.company, 'id' : wallet_id }) }}">{{ entity.company }}</a></td>
+            <td style="text-align:right;">{{ entity.account }}</td>
+            <td style="text-align:right;">{{ entity.provision }}</td>
+            <td style="text-align:right;">{{ entity.amount }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br/>
+{% endblock %}

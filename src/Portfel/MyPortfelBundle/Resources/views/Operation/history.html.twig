@@ -1,17 +1,20 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
 
-<h1>Operation list</h1>
+{% include 'MyPortfelBundle:My:top.html.twig' %}
 
 <table class="records_list">
     <thead>
         <tr>
-            <th>Data</th>
+            <th style="width:130px;">Data</th>
             <th>Typ operacji</th>
             <th>Akcje</th>
             <th>Ilość</th>
+            <th>Kurs</th>
             <th>Prowizja</th>
             <th>Wartość</th>
+            <th>Operacje</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -21,18 +24,15 @@
             <td></td>
 	    <td><a href="{{ path('history_show', { 'name' : entity.company, 'wallet_id' : wallet_id }) }}">{{ entity.company }}</a></td>
             <td style="text-align:right;">{{ entity.account }}</td>
-            <td style="text-align:right;">{{ entity.provision }}</td>
             <td style="text-align:right;">{{ entity.amount }}</td>
+            <td style="text-align:right;">{{ entity.provision }}</td>
+            <td style="text-align:right;">{{ entity.account * entity.amount }}</td>
+            <td><a href="{{ path('operation_edit', {'wallet_id' : wallet_id, 'operation_id' : entity.id}) }}">modyfikuj</a></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-
-<ul>
-    <li>
-        <a href="{{ path('operation_new', { 'wallet_id' : wallet_id }) }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+<br/>
+<button class="action blue"><a href="{{ path('operation_new', { 'wallet_id' : wallet_id }) }}"><span class="label">Dokup</span></a></button>
+<br/><br/>
 {% endblock %}

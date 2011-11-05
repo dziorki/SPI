@@ -67,7 +67,7 @@ class OperationController extends Controller
 
         $entities = $em->createQueryBuilder()
                 
-                ->select(array('o.date', 'c.name as company', 'o.account', 'o.provision', 'o.amount'))
+                ->select(array('o.id', 'o.date', 'c.name as company', 'o.account', 'o.provision', 'o.amount'))
                 ->from('MyPortfelBundle:Operation','o')
                 ->join('o.company','c')
 		->where('o.wallet = :wallet_id','c.name = :name')
@@ -169,26 +169,27 @@ class OperationController extends Controller
     /**
      * Displays a form to edit an existing Operation entity.
      *
-     * @Route("/{id}/edit", name="operation_edit")
+     * @Route("/{operation_id}/edytuj", name="operation_edit")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($wallet_id, $operation_id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('MyPortfelBundle:Operation')->find($id);
+        $entity = $em->getRepository('MyPortfelBundle:Operation')->find($operation_id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Operation entity.');
         }
 
         $editForm = $this->createForm(new OperationType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($operation_id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'wallet_id' => $wallet_id
         );
     }
 
@@ -233,19 +234,19 @@ class OperationController extends Controller
     /**
      * Deletes a Operation entity.
      *
-     * @Route("/usun", name="operation_delete")
+     * @Route("/{operation_id}/usun", name="operation_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
+    public function deleteAction($operation_id)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($operation_id);
         $request = $this->getRequest();
 
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('MyPortfelBundle:Operation')->find($id);
+            $entity = $em->getRepository('MyPortfelBundle:Operation')->find($operation_id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Operation entity.');
@@ -258,9 +259,9 @@ class OperationController extends Controller
         return $this->redirect($this->generateUrl('operation'));
     }
 
-    private function createDeleteForm($id)
+    private function createDeleteForm($operation_id)
     {
-        return $this->createFormBuilder(array('id' => $id))
+        return $this->createFormBuilder(array('id' => $operation_id))
             ->add('id', 'hidden')
             ->getForm()
         ;
