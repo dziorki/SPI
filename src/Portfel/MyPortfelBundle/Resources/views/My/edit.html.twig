@@ -1,27 +1,42 @@
 {% extends "::base.html.twig" %} 
 {% block content %}
 
-<h1>Wallet edit</h1>
+{% include 'MyPortfelBundle:My:top.html.twig' %}
 
 <form action="{{ path('my_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
+    
+    <table style="border-collapse: separate;border-spacing: 2px;">
+        <tr>
+            <td class="left">{{ form_label(edit_form.name) }}</td>
+            <td class="center">{{ form_widget(edit_form.name) }}</td>
+            <td class="right">{{ form_errors(edit_form.name) }}</td>
+        </tr>
+        <tr>
+            <td class="left">{{ form_label(edit_form.public) }}</td>
+            <td class="center">{{ form_widget(edit_form.public) }}</td>
+            <td class="right">{{ form_errors(edit_form.public) }}</td>
+        </tr>
+    </table>
+
+
+    {{ form_rest(edit_form) }}
+    
+
     <p>
-        <button type="submit">Edit</button>
+        <button class="action green" type="submit"><span class="label">Edytuj</span></button>
     </p>
 </form>
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('my') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
         <form action="{{ path('my_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+            <button class="action red" type="submit"><span class="label">Usuń</span></button>
         </form>
     </li>
 </ul>
-
+<br/><br/>
+<a href="{{ path('my') }}">
+    Wróć do listy
+</a>
 {% endblock %}

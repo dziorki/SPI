@@ -21,7 +21,7 @@
     {% for entity in entities %}
         <tr>
             <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td></td>
+            <td>{% if entity.account > 0 %}<span style="color:green;">Kupno</span>{% else %}<span style="color:red;">Sprzedaż</span>{% endif %}</td>
 	    <td><a href="{{ path('history_show', { 'name' : entity.company, 'wallet_id' : wallet_id }) }}">{{ entity.company }}</a></td>
             <td style="text-align:right;">{{ entity.account }}</td>
             <td style="text-align:right;">{{ entity.amount }}</td>

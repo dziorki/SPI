@@ -7,17 +7,13 @@ security:
             iterations: 1
             encode_as_base64: true
 
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
     providers:
         fos_userbundle:
             id: fos_user.user_manager
 #        in_memory:
 #            users:
 #                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-#                admin: { password: tomasz21, roles: [ 'ROLE_ADMIN' ] }
+#                admin: { password: adminpass, roles: [ 'ROLE_SUPER_ADMIN' ] }
         main:
             entity: { class: Portfel\SecurityBundle\Entity\User, property: username }
 
@@ -59,4 +55,8 @@ security:
         - { path: ^/user/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/change, role: ROLE_USER }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin, role: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN

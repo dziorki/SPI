@@ -91,6 +91,15 @@ class User extends BaseUser
         return $this->wallet;
     }
     
+    public function getRole()
+    {
+        if(empty($this->roles)){
+            return 'User';
+        }
+
+        return 'Administrator';
+    }
+    
     /**
      * Generate a new salt - can't be done as prepersist because we need it before then
      */

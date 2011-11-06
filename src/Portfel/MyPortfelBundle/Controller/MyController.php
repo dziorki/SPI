@@ -30,7 +30,8 @@ class MyController extends Controller {
 
             $em = $this->getDoctrine()->getEntityManager();
             
-            $criteria = array('user' => $this->get('security.context')->getToken()->getUser()->getId());
+            $criteria = array('user' => $this->get('security.context')->getToken()->getUser()->getId()
+                    );
             
             $entities = $em->getRepository('MyPortfelBundle:Wallet')->findBy($criteria);
 

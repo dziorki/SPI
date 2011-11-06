@@ -1,0 +1,6 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+<div class="fos_user_group_show">
+    <p>{{ 'group.show.name'|trans([], 'FOSUserBundle') }}: {{ group.getName() }}</p>
+</div>
+{% endblock %}

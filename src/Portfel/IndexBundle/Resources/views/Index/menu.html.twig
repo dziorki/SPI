@@ -5,7 +5,7 @@
 <a href="">Statystyki portfeli</a> |
 <a href="">FAQ</a> |
 <a href="">Kontakt</a>
-
+{% if is_granted('ROLE_ADMIN') %}| <a href="{{ path('admin') }}" style="color: green;">Administracja</a>{% endif %}
 
 
 

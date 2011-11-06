@@ -1,8 +1,15 @@
+{% extends "::base.html.twig" %} 
+{% block content %}
+
+{% include 'MyPortfelBundle:My:top.html.twig' %}
+
 {% form_theme form theme %}
 
 <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
     {{ form_widget(form) }}
+    <br/>
     <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+        <button class="action blue" type="submit"><span class="label">{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}</span></button>
     </div>
 </form>
+{% endblock %}

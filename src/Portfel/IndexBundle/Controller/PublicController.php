@@ -18,7 +18,9 @@ class PublicController extends Controller {
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('MyPortfelBundle:Wallet')->findAll();
+        $entities = $em->getRepository('MyPortfelBundle:Wallet')->findBy(array(
+                              'public' => true)
+                );
 
         if (!$entities) {
             throw $this->createNotFoundException('Unable to find User entity.');

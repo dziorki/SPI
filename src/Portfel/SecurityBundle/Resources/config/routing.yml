@@ -4,13 +4,29 @@
 
 
 
-fos_user_profile:
-    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /user/profile
+#fos_user_profile:
+#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+#    prefix: /user/profile
 
 #fos_user_register:
 #    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
 #    prefix: /register
+admin:
+    pattern:  /admin
+    defaults: { _controller: PortfelSecurityBundle:Admin:index }
+
+
+fos_user_group:
+    resource: "@PortfelSecurityBundle/Resources/config/routing/user.yml"
+    prefix: /admin/user
+
+fos_user_profile:
+    pattern:  /user/profile
+    defaults: { _controller: PortfelSecurityBundle:Profile:show }
+
+fos_user_profile_edit:
+    pattern:  /user/profile/edit
+    defaults: { _controller: PortfelSecurityBundle:Profile:edit }
 
 fos_user_register:
     pattern:  /user/register
@@ -36,6 +52,28 @@ fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix: /user
     
-fos_user_group:
-    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
-    prefix: /group
+
+    
+#fos_user_group:
+#    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+#    prefix: /group
+    
+fos_user_group_list:
+    pattern: /admin/group/list
+    defaults: { _controller: PortfelSecurityBundle:Group:list}
+    
+fos_user_group_new:
+    pattern: /admin/group/new
+    defaults: { _controller: PortfelSecurityBundle:Group:new}
+
+fos_user_group_show:
+    pattern: /admin/group/{groupname}
+    defaults: { _controller: PortfelSecurityBundle:Group:show}
+      
+fos_user_group_edit:
+    pattern: /admin/group/{groupname}/edit
+    defaults: { _controller: PortfelSecurityBundle:Group:edit}
+    
+fos_user_group_delete:
+    pattern: /admin/group/{groupname}/delete
+    defaults: { _controller: PortfelSecurityBundle:Group:delete}

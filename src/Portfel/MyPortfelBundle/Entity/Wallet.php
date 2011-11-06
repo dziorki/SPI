@@ -27,6 +27,12 @@ class Wallet {
     protected $name;
 
     /**
+     * @var boolean $public
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $public;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Portfel\SecurityBundle\Entity\User", inversedBy="wallets")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -134,5 +140,25 @@ class Wallet {
     public function getOperations()
     {
         return $this->operations;
+    }
+
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * Get public
+     *
+     * @return boolean 
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 }

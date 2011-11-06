@@ -11,7 +11,7 @@ class WalletType extends AbstractType
     {
         $builder
             ->add('name')
-        ;
+            ->add('public');
     }
 
     public function getName()
